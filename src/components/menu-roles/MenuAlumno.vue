@@ -26,6 +26,8 @@
             <v-list-item prepend-icon="mdi-account-multiple" title="Reinscripción" value=""></v-list-item>
             <v-list-item prepend-icon="mdi-star" title="Pagos" value=""></v-list-item>
         </v-list>
+
+        
         <template v-slot:append>
           <div>
             <v-list-item prepend-icon="mdi-exit-to-app" class="bg-red-darken-4">

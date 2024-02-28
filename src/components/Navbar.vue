@@ -39,11 +39,25 @@
 
             <v-divider></v-divider>
 
-            <v-list density="compact" nav>
-                <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
-                <v-list-item prepend-icon="mdi-account" title="My Account" value="account"></v-list-item>
-                <v-list-item prepend-icon="mdi-account-group-outline" title="Users" value="users"></v-list-item>
-            </v-list>
+            <v-list v-model:opened="open">
+
+      <v-list-group value="Users">
+        <template v-slot:activator="{ props }">
+          <v-list-item
+            v-bind="props"
+            prepend-icon="mdi-account-circle"
+            title="Users"
+          ></v-list-item>
+        </template>
+        <v-list-item
+            v-for="([title, icon], i) in admins"
+            :key="i"
+            :title="title"
+            :prepend-icon="icon"
+            :value="title"
+          ></v-list-item>
+      </v-list-group>
+    </v-list>
             <template v-slot:append>
                 <div>
                     <v-list-item prepend-icon="mdi-exit-to-app" class="bg-red-darken-4">
@@ -56,14 +70,26 @@
 </template>
 
 <script>
-// import MenuAlumno from '@/components/menu-roles/MenuAlumno'
+import { ref } from 'vue';
+
 export default {
-    // components: { MenuAlumno },
-    data() {
-        return {
-            drawer: true,
-            rail: true,
-        }
-    },
-}
+  setup() {
+    // Data
+    const drawer = ref(true);
+    const rail = ref(true);
+    const open = ref(['Users']);
+    const admins = ref([
+      ['Management', 'mdi-account-multiple-outline'],
+      ['Settings', 'mdi-cog-outline'],
+    ]);
+
+    // Return values
+    return {
+      drawer,
+      rail,
+      open,
+      admins,
+    };
+  },
+};
 </script>
